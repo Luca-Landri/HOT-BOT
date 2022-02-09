@@ -1,51 +1,74 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <meta name="apple-mobile-web-app-capable" content="yes">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Live Chat</title>
-        <link rel="stylesheet" href="/Styles.css">
+
+        <title>HOT-BOT</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="stylesheet" href="/styles.css">
+        <link href="http://fonts.cdnfonts.com/css/helvetica-neue-9" rel="stylesheet">
     </head>
     <body>
-        <section class="container">
-            <div class="text-section">
-                <div>
+        <section class="app">
+            <div class="chat">
+                <header>
+                    <img src="#logo" />
+                    <h1>Hot-Bot</h1>
+                </header>
 
+                <div id="messages">
+                    <div class="message my">
+                        <div>
+                            <h4>Luca Landriscina </h4>
+                            <p>Hai proprio un bel fallo. Palle rasate ma non troppo Lunghezza non troppo esuberante. Voto 8/10</p>
+                            <span>9:14</span>
+                        </div>
+                        <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
+                    </div>
                 </div>
-                <ul id="messages"></ul>
+                <form>
+                    <input autocomplete="off" class="input-text" type="text" name="input-text" id="input">
+                    <button>
+                        <span class="iconify" data-icon="mdi:send" data-width="50" data-height="50"></span>
+                    </button>
+                </form>
             </div>
-            <form id="form">
-                <input autocomplete="off" class="input-text" type="text" name="input-text" id="input">
-                <button>Invia</button>
-            </form>
+            
+            <div class="details">
+                <h2>Dettagli</h2>
+                <div class="member">
+                    <h3>Membri</h3>
+                    <a class="invite" href="/invite"/>Invita</a>
+                </div>
+                <ul>
+                    <li>
+                        <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
+                        <div class="name">
+                            <h3>Luca Landriscina (tu) </h3>
+                            <h4>Stato</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/male/jonny.svg">
+                        <div class="name">
+                            <h3>Jonathan Caputo </h3>
+                        </div>
+                    </li>
+                    <li>
+                        <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/forkio.svg">
+                        <div class="name">
+                            <h3>Tommaso Ferrara </h3>
+                            <h4>Goloso di cazzi</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </section>
-
+        <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
         <script src="/socket.io.js"></script>
-        <script>
-            let socket = io("79.43.35.3:8000");
-            let messages = document.getElementById("messages")
-            let form = document.querySelector("form")
-            let input = document.querySelector("input")
-            let item
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault()
-                if (input.value) {
-                    socket.emit('message', input.value)
-                    item = document.createElement("li")
-                    item.textContent = input.value
-                    messages.appendChild(item)
-                    input.value = ''
-                }
-            })
-
-            socket.on('message', (msg) => {
-                item = document.createElement("li")
-                console.log("l muert d mamt")
-                console.log(msg)
-                item.textContent = msg
-                messages.appendChild(item)
-            })
-        </script>
+        <script src="/script.js"></script>
     </body>
 </html>
