@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+}
+
+.input-text {
+  border-radius: 20px;
+  border: 2px solid black;
+  width: 200px;
+  height: 40px;
+  margin-left: 50px;
+}
+
+button {
+  border-radius: 30px;
+  height: 40px;
+  width: 60px;
+  border: none;
+  margin-right: 50px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.text-section {
+  display: flex;
+  height: 90vh;
+}
+
+form {
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aqua;
+  height: 10vh;
+  border-radius: 25px 25px 0 0;
+  width: 100vw;
+}
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages > li {
+  padding: 0.5rem 1rem;
+}
+
+#messages > li:nth-child(odd) {
+  background: #efefef;
+}
