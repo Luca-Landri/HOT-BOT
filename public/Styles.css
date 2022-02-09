@@ -1,57 +1,115 @@
 * {
   margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
 }
 
-.input-text {
-  border-radius: 20px;
-  border: 2px solid black;
-  width: 200px;
-  height: 40px;
-  margin-left: 50px;
+.app {
+  display: flex;
+  flex-direction: row;
+  background-color: #f5f7fb;
+  height: 100vh;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 25%;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 25px 0 0 25px;
+  background: #fff;
+  padding: 30px 15px 0 25px;
+}
+
+.details h2 {
+  font-weight: bold;
+  font-size: 35px;
+  line-height: 45px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  width: 80%;
+  margin: 0 auto 0 auto;
+  background-color: #fff;
+}
+
+input {
+  border: none;
+  width: 92%;
+  border-radius: 30px;
+}
+
+input[type="text"] {
+  width: 100%;
+  font-size: 20px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border: none;
+}
+
+ul {
+  list-style-type: none;
 }
 
 button {
   border-radius: 30px;
-  height: 40px;
-  width: 60px;
+  background: #0099ff;
   border: none;
-  margin-right: 50px;
+  width: 100px;
+  height: 100px;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.avatar {
+  width: 70px;
+  height: 70px;
 }
 
-.text-section {
-  display: flex;
-  height: 90vh;
-}
-
-form {
-  bottom: 0;
-  position: fixed;
+li {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+}
+
+.name h3 {
+  width: 200px;
+}
+
+header {
+  display: flex;
+}
+
+.member {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  background-color: aqua;
-  height: 10vh;
-  border-radius: 25px 25px 0 0;
-  width: 100vw;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-#messages {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-#messages > li {
-  padding: 0.5rem 1rem;
-}
-
-#messages > li:nth-child(odd) {
-  background: #efefef;
+.invite {
+  background-color: #0099ff;
+  border-radius: 25px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
 }
