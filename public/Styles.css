@@ -113,3 +113,26 @@ header {
   text-decoration: none;
   padding: 10px;
 }
+
+.message {
+  display: flex;
+  flex-direction: row;
+}
+
+.message img {
+  position: relative;
+  top: 40px;
+  margin-right: 10px;
+}
+
+.my {
+  background: #7164bb99;
+  border-radius: 25px 25px 25px 0;
+  padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .details {
+    display: none;
+  }
+}

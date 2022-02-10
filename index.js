@@ -11,7 +11,6 @@ const io = require("socket.io")(server, {cors: { origin: "*"}})
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, '/views'));
-app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.engine('html', require('ejs').renderFile);
 app.set("view engine", "html");
 
