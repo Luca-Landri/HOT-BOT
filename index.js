@@ -30,6 +30,11 @@ io.on('connection', (socket) => {
 
   socket.on('message', (msg) => {
     socket.broadcast.emit('message', msg)
+
+  })
+
+  socket.on("name", (name) => {
+    socket.broadcast.emit("name", name)
   })
 })
 

@@ -1,8 +1,28 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Helvetica Neue", "Open Sans", sans-serif;
   box-sizing: border-box;
+}
+
+@keyframes slidein {
+  from {
+    position: relative;
+    left: 30px;
+    opacity: 0;
+  }
+
+  75% {
+    position: relative;
+    opacity: 0.5;
+    left: 15px;
+  }
+
+  to {
+    position: relative;
+    opacity: 1;
+    left: 0px;
+  }
 }
 
 .app {
@@ -42,23 +62,26 @@ form {
   width: 80%;
   margin: 0 auto 0 auto;
   background-color: #fff;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
 }
 
-input {
+.input-text {
   border: none;
   width: 92%;
   border-radius: 30px;
 }
 
-input[type="text"] {
+.input-text[type="text"] {
   width: 100%;
-  font-size: 20px;
+  font-size: 25px;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  outline: none;
 }
 
-input[type="text"]:focus {
+.input-text[type="text"]:focus {
   border: none;
 }
 
@@ -66,11 +89,11 @@ ul {
   list-style-type: none;
 }
 
-button {
-  border-radius: 30px;
+.sendMessage {
+  border-radius: 30px !important;
   background: #0099ff;
   border: none;
-  width: 100px;
+  width: 110px;
   height: 100px;
 }
 
@@ -85,9 +108,20 @@ li {
   align-items: center;
 }
 
+.d-none {
+  display: none;
+}
+
 .name {
   display: flex;
   flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 15px;
 }
 
 .name h3 {
@@ -117,6 +151,7 @@ header {
 .message {
   display: flex;
   flex-direction: row;
+  margin-bottom: 15px;
 }
 
 .message img {
@@ -125,14 +160,110 @@ header {
   margin-right: 10px;
 }
 
-.my {
+.other {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my-focus {
   background: #7164bb99;
   border-radius: 25px 25px 25px 0;
   padding: 15px;
 }
 
+.other-focus {
+  background: #cdbaff;
+  border-radius: 25px 25px 0 25px;
+  padding: 15px;
+}
+
+.enter-animation {
+  animation-duration: 0.3s;
+  animation-name: slidein;
+}
+
+#messages {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/* shake animation */
+
+.errorShake {
+  animation: shake 0.5s 1;
+}
+
+@keyframes shake {
+  0% {
+    right: 0px;
+  }
+  25% {
+    right: 2rem;
+  }
+  50% {
+    right: -2rem;
+  }
+  75% {
+    right: 1rem;
+  }
+  100% {
+    right: 0px;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .details {
     display: none;
+  }
+
+  .input {
+    display: flex;
+    justify-content: center;
+    border-radius: 25px;
+    width: 80%;
+    margin: 0 auto 0 auto;
+    background-color: #fff;
+    margin-bottom: 15px;
+  }
+
+  .input-text {
+    border: none;
+    width: 92%;
+    border-radius: 30px;
+    outline: none;
+  }
+
+  .input-text[type="text"] {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  .input-text[type="text"]:focus {
+    border: none;
+    outline: none;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .sendMessage {
+    border-radius: 20px;
+    background: #0099ff;
+    border: none;
+    width: 110px;
+    height: 80px;
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
   }
 }

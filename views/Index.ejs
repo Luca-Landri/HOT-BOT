@@ -9,22 +9,24 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
 
         <link rel="stylesheet" href="/styles.css">
+        <!-- bootstrap css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="http://fonts.cdnfonts.com/css/helvetica-neue-9" rel="stylesheet">
     </head>
     <body>
         <section class="app">
             <div class="chat">
                 <header>
-                    <img src="#logo" />
-                    <h1>Hot-Bot</h1>
+                    <h1 class="title">Hot-Bot</h1>
                 </header>
 
                 <div id="messages">
                     
                 </div>
-                <form>
-                    <input autocomplete="off" class="input-text" type="text" name="input-text" id="input" placeholder="scrivi il tuo messaggio">
-                    <button>
+                <form class="input">
+                    <input class="input-text" autocomplete="off" class="input-text" type="text" name="input-text" id="input" placeholder="scrivi il tuo messaggio">
+                    <button class="sendMessage">
                         <span class="iconify" data-icon="mdi:send" data-width="50" data-height="50"></span>
                     </button>
                 </form>
@@ -60,8 +62,33 @@
                 </ul>
             </div>
         </section>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="modalUsername" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ciao forestiero del webbe, come ti chiami?</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="identityForm">
+                        <div class="input-group flex-nowrap">
+                            <span class="input-group-text" id="addon-wrapping">@</span>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-lg">Tras</button>
+                        </div>
+                    </form>
+            </div>
+            </div>
+        </div>
         <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
         <script src="/socket.io.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
         <script src="/script.js"></script>
     </body>
 </html>
