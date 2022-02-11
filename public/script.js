@@ -1,4 +1,4 @@
-let socket = io("87.21.74.178:8000");
+let socket = io("79.13.78.64:8000");
 let messagesDOM = document.getElementById("messages");
 let form = document.querySelector("form");
 let input = document.querySelector("input");
@@ -9,15 +9,24 @@ let usernameFromCookies = JSON.parse(localStorage.getItem("Username"));
 let modalForm = document.querySelector("#identityForm");
 let hour = ""
 let username = ""
+let userContainer = document.querySelector(".userContainer")
+
+let data = {
+  username: "",
+  ness: ""
+}
 
 console.log(usernameFromCookies);
 usernameModal();
 
-function namePrinter() {
-    socket.on("name", (name) => {
-        return `<h4>${name}</h4>`
-    }) 
+function updateHour() {
+  setInterval(() => {
+    let hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  }, 1000);
+
+  return hour
 }
+
 
 function usernameModal(){
     if (usernameFromCookies !=  null ) return //Se usernameFromCache è settato termina la funzione
@@ -31,6 +40,9 @@ function usernameModal(){
         if (username != "") {
           modal.hide();
           localStorage.setItem("Username", JSON.stringify(username));
+          data.username = localStorage.getItem("Username")
+          socket.emit("data", data)
+          
         } else {
           //Shake modal or smth
           modalElement.classList.add("errorShake");
@@ -38,48 +50,58 @@ function usernameModal(){
             modalElement.classList.remove("errorShake");
           }, 500);
         }
-        console.log(username);
     });
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   let hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  setInterval(() => {
-    hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  }, 1000);
 
   if (input.value) {
     messagesDOM.innerHTML += `<div class="message enter-animation">
-                <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
+                <img class="avatar" src="https://avatars.dicebear.com/api/human/finocchiello.svg">
                 <div class="my-focus">
-                    <h4>${username}</h4>
+                    <h4>${data.username}</h4>
                     <p>${input.value}</p>
                     <span>${hour}</span>
                 </div>
             </div>`;
-    socket.emit("message", input.value);
-
+    data.ness = input.value
+    socket.emit("data", data);
     input.value = "";
   }
   messagesDOM.scrollTop = messagesDOM.scrollHeight; //Updates height and scrolls to bottom
   removeAnimation();
 });
-socket.on("name", (name) => {
-    username = name
-})
 
 console.log(username)
 
-socket.on("message", (msg) => {
-  let hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+socket.on("count", (userCount) => {
+  console.log(userCount)
+  for (let i = 0; i < userCount; i++) {
+    console.log("ciao")
+    userContainer.innerHTML += `
+    <li class="person">
+      <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
+      <div class="name">
+          <h3>${socket.id}</h3>
+          <h4>Stato</h4>
+      </div>
+    </li>`
+  }
+
+})
+
+socket.on("dati", (dati) => {
+  console.log(dati)
+  let hour = date.getHours() + ":" + date.getMinutes();
   setInterval(() => {
-    hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    hour = date.getHours() + ":" + date.getMinutes();
   }, 1000);
   messagesDOM.innerHTML += `<div class="message other enter-animation">
     <div class="other-focus">
-    ${namePrinter()}
-    <p>${msg}</p>
+    <h4>${dati.username}</h4>
+    <p>${dati.ness}</p>
     <span>${hour}</span>
     </div>
     <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">

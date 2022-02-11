@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require("path");
-const favicon = require('serve-favicon');
+//const favicon = require('serve-favicon');
+let userCount = 0
 
 const port = 8000;
 const url = "http://localhost:"+port;
@@ -18,24 +19,24 @@ app.get('/', (req, res) => {
   res.render("index.ejs")
 })
 
-app.get('/luki', (req, res) => {
+app.get('/luca', (req, res) => {
   res.render("luki.ejs")
 })
 
 io.on('connection', (socket) => {
-  console.log(socket.id + " connected");
+  console.log(socket.id + " connected")
+  userCount++
   socket.on("disconnect", () => {
     console.log(socket.id + " disconnected")
+    userCount--
+  })
+  socket.broadcast.emit("count", userCount)
+
+  socket.on('data', (dati) => {
+    console.log(dati)
+    socket.broadcast.emit('dati', dati)
   })
 
-  socket.on('message', (msg) => {
-    socket.broadcast.emit('message', msg)
-
-  })
-
-  socket.on("name", (name) => {
-    socket.broadcast.emit("name", name)
-  })
 })
 
 
