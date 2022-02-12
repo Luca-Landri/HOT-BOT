@@ -5,7 +5,7 @@ let input = document.querySelector("input");
 let date = new Date();
 let modalElement = document.getElementById("modalUsername");
 let modal = new bootstrap.Modal(modalElement);
-let usernameFromCookies = JSON.parse(localStorage.getItem("Username"));
+let usernameFromCookies = localStorage.getItem("Username");
 let modalForm = document.querySelector("#identityForm");
 let hour = ""
 let username = ""
@@ -13,34 +13,33 @@ let userContainer = document.querySelector(".userContainer")
 
 let data = {
   username: "",
-  ness: ""
+  mess: "",
+  img: ""
 }
 
-console.log(usernameFromCookies);
+let avatarType = ["male", "female", "human", "identicon", "initials", "bottts", "avataaars", "jdenticon"]
 usernameModal();
 
-function updateHour() {
-  setInterval(() => {
-    let hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  }, 1000);
 
-  return hour
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
+
 
 
 function usernameModal(){
     if (usernameFromCookies !=  null ) return //Se usernameFromCache è settato termina la funzione
     //Altrimenti continua e fai il resto
+    data.img = `https://avatars.dicebear.com/api/${avatarType[getRandomInt(8)]}/:seed.svg`
+    localStorage.setItem("img", data.img)
     modal.show();
-
     modalForm.addEventListener("submit", (e) => {
         e.preventDefault();
         username = modalForm.querySelector("input").value;
     
         if (username != "") {
           modal.hide();
-          localStorage.setItem("Username", JSON.stringify(username));
-          data.username = localStorage.getItem("Username")
+          localStorage.setItem("Username", username);
           socket.emit("data", data)
           
         } else {
@@ -52,21 +51,24 @@ function usernameModal(){
         }
     });
 }
+if (data.img == "") {
+}
+data.username = localStorage.getItem("Username")
 
 form.addEventListener("submit", (e) => {
+  //Get date object
+  let date = new Date()
   e.preventDefault();
-  let hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-
   if (input.value) {
     messagesDOM.innerHTML += `<div class="message enter-animation">
-                <img class="avatar" src="https://avatars.dicebear.com/api/human/finocchiello.svg">
+                <img class="avatar" src=${data.img}>
                 <div class="my-focus">
                     <h4>${data.username}</h4>
                     <p>${input.value}</p>
-                    <span>${hour}</span>
+                    <span>${(date.getHours()<10?"0":"")+date.getHours()+':'+ (date.getMinutes()<10?"0":"") + date.getMinutes() +":"+ (date.getSeconds()<10?"0":"") + date.getSeconds()}</span>
                 </div>
             </div>`;
-    data.ness = input.value
+    data.mess = input.value
     socket.emit("data", data);
     input.value = "";
   }
@@ -74,40 +76,36 @@ form.addEventListener("submit", (e) => {
   removeAnimation();
 });
 
-console.log(username)
 
-socket.on("count", (userCount) => {
-  console.log(userCount)
-  for (let i = 0; i < userCount; i++) {
-    console.log("ciao")
+socket.on("count", (users) => {
+  console.log(users)
+  for (let i = 0; i < users.length; i++) {
     userContainer.innerHTML += `
     <li class="person">
       <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
       <div class="name">
-          <h3>${socket.id}</h3>
+          <h3>${data.username}</h3>
           <h4>Stato</h4>
       </div>
     </li>`
   }
-
 })
 
+
 socket.on("dati", (dati) => {
+  //Get date object
+  let date = new Date()
   console.log(dati)
-  let hour = date.getHours() + ":" + date.getMinutes();
-  setInterval(() => {
-    hour = date.getHours() + ":" + date.getMinutes();
-  }, 1000);
   messagesDOM.innerHTML += `<div class="message other enter-animation">
     <div class="other-focus">
     <h4>${dati.username}</h4>
-    <p>${dati.ness}</p>
-    <span>${hour}</span>
+    <p>${dati.mess}</p>
+    <span>${(date.getHours()<10?"0":"")+date.getHours()+':'+ (date.getMinutes()<10?"0":"") + date.getMinutes()+":"+ (date.getSeconds()<10?"0":"") + date.getSeconds()}</span>
     </div>
     <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
     </div>`;
-  messagesDOM.scrollTop = messagesDOM.scrollHeight;
-  removeAnimation(); //Updates height and scrolls to bottom
+  messagesDOM.scrollTop = messagesDOM.scrollHeight; //Updates height and scrolls to bottom
+  removeAnimation(); 
 });
 
 function removeAnimation() {
