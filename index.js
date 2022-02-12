@@ -2,9 +2,11 @@ const express = require('express');
 const path = require("path");
 //const favicon = require('serve-favicon');
 let userCount = 0
+let users = []
+let index
 
 const port = 8000;
-const url = "http://localhost:"+port;
+const url = "http://localhost:" + port;
 const app = express();
 
 const server = require("http").createServer(app);
@@ -19,18 +21,28 @@ app.get('/', (req, res) => {
   res.render("index.ejs")
 })
 
+app.get('/bestemmie', (req, res) => {
+  res.render('bestemmie.ejs')
+})
+
 app.get('/luca', (req, res) => {
   res.render("luki.ejs")
 })
 
 io.on('connection', (socket) => {
   console.log(socket.id + " connected")
-  userCount++
+  users.push(socket.id)
+  console.log(users)
   socket.on("disconnect", () => {
     console.log(socket.id + " disconnected")
-    userCount--
+    index = users.indexOf(socket.id)
+    if (index > -1) {
+      users.splice(index, 1)
+      console.log(userCount)
+    }
   })
-  socket.broadcast.emit("count", userCount)
+  
+  socket.broadcast.emit("count", users)
 
   socket.on('data', (dati) => {
     console.log(dati)
