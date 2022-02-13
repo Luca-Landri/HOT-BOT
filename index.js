@@ -29,6 +29,10 @@ app.get('/luca', (req, res) => {
   res.render("luki.ejs")
 })
 
+app.get('/invite', (req, res) => {
+  res.render('invite.ejs')
+})
+
 io.on('connection', (socket) => {
   console.log(socket.id + " connected")
   users.push(socket.id)
