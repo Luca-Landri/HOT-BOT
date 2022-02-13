@@ -6,9 +6,8 @@ let date = new Date();
 let modalElement = document.getElementById("modalUsername");
 let modal = new bootstrap.Modal(modalElement);
 let usernameFromCookies = localStorage.getItem("Username");
+let imageFromCookies = localStorage.getItem("img");
 let modalForm = document.querySelector("#identityForm");
-let hour = ""
-let username = ""
 let userContainer = document.querySelector(".userContainer")
 
 let data = {
@@ -20,22 +19,16 @@ let data = {
 let avatarType = ["male", "female", "human", "identicon", "initials", "bottts", "avataaars", "jdenticon"]
 usernameModal();
 
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
-
-
-
 function usernameModal(){
-    if (usernameFromCookies !=  null ) return //Se usernameFromCache è settato termina la funzione
+    if (usernameFromCookies !=  null && imageFromCookies != null ) return //Se usernameFromCache è settato termina la funzione
     //Altrimenti continua e fai il resto
-    data.img = `https://avatars.dicebear.com/api/${avatarType[getRandomInt(8)]}/:seed.svg`
     localStorage.setItem("img", data.img)
     modal.show();
     modalForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        username = modalForm.querySelector("input").value;
+        let username = modalForm.querySelector("input").value;
+        let img = `https://avatars.dicebear.com/api/${avatarType[Math.floor(Math.random()*avatarType.length)]}/:seed.svg`
+        localStorage.setItem("img", img)
     
         if (username != "") {
           modal.hide();
@@ -51,9 +44,9 @@ function usernameModal(){
         }
     });
 }
-if (data.img == "") {
-}
+
 data.username = localStorage.getItem("Username")
+data.img = localStorage.getItem("img")
 
 form.addEventListener("submit", (e) => {
   //Get date object
@@ -102,7 +95,7 @@ socket.on("dati", (dati) => {
     <p>${dati.mess}</p>
     <span>${(date.getHours()<10?"0":"")+date.getHours()+':'+ (date.getMinutes()<10?"0":"") + date.getMinutes()+":"+ (date.getSeconds()<10?"0":"") + date.getSeconds()}</span>
     </div>
-    <img class="avatar" src="https://avatars.dicebear.com/api/adventurer/finocchiello.svg">
+    <img class="avatar" src=${dati.img}>
     </div>`;
   messagesDOM.scrollTop = messagesDOM.scrollHeight; //Updates height and scrolls to bottom
   removeAnimation(); 
