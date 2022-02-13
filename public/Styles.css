@@ -20,7 +20,7 @@
 
   to {
     position: relative;
-    opacity: 1;
+    opacity: 0.9;
     left: 0px;
   }
 }
@@ -118,6 +118,12 @@ ul {
 .avatar {
   width: 70px;
   height: 70px;
+}
+
+.avatar-right {
+  width: 70px;
+  height: 70px;
+  margin-left: 20px;
 }
 
 li {
@@ -234,6 +240,14 @@ header {
 }
 
 @media only screen and (max-width: 768px) {
+  header .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    z-index: 1;
+  }
+
   .details {
     display: none;
   }
@@ -257,11 +271,15 @@ header {
 
   .input-text[type="text"] {
     width: 100%;
-    font-size: 15px;
+    font-size: 18px;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     outline: none;
+  }
+
+  .logo {
+    margin-top: 5px;
   }
 
   .input-text[type="text"]:focus {
@@ -274,7 +292,7 @@ header {
   }
 
   .sendMessage {
-    border-radius: 20px;
+    border-radius: 20px !important;
     background: #0099ff;
     border: none;
     width: 110px;
@@ -284,5 +302,17 @@ header {
   .title {
     display: flex;
     justify-content: center;
+  }
+
+  .my-focus {
+    background: #7164bb99;
+    border-radius: 20px 20px 20px 0;
+    padding: 15px;
+  }
+
+  .other-focus {
+    background: #cdbaff;
+    border-radius: 20px 20px 0 20px;
+    padding: 15px;
   }
 }
