@@ -95,7 +95,7 @@ socket.on("dati", (dati) => {
     <p>${dati.mess}</p>
     <span>${(date.getHours()<10?"0":"")+date.getHours()+':'+ (date.getMinutes()<10?"0":"") + date.getMinutes()+":"+ (date.getSeconds()<10?"0":"") + date.getSeconds()}</span>
     </div>
-    <img class="avatar" src=${dati.img}>
+    <img class="avatar-right" src=${dati.img}>
     </div>`;
   messagesDOM.scrollTop = messagesDOM.scrollHeight; //Updates height and scrolls to bottom
   removeAnimation(); 
