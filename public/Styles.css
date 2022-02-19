@@ -73,6 +73,11 @@ header .background {
   line-height: 45px;
 }
 
+.logo {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
 form {
   display: flex;
   justify-content: center;
@@ -176,6 +181,7 @@ header {
   display: flex;
   flex-direction: row;
   margin-bottom: 15px;
+  width: 50%;
 }
 
 .message img {
@@ -184,19 +190,24 @@ header {
   margin-right: 10px;
 }
 
+.message p {
+  overflow-wrap: break-word;
+  max-width: 22rem;
+}
 .other {
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }
 
 .my-focus {
-  background: #7164bb99;
+  background: #9ad0ec;
   border-radius: 25px 25px 25px 0;
   padding: 15px;
 }
 
 .other-focus {
-  background: #cdbaff;
+  background: #398ab9;
   border-radius: 25px 25px 0 25px;
   padding: 15px;
 }
@@ -280,6 +291,7 @@ header {
 
   .logo {
     margin-top: 5px;
+    padding-left: 40px;
   }
 
   .input-text[type="text"]:focus {

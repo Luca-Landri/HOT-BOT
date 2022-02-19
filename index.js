@@ -39,6 +39,7 @@ io.on('connection', (socket) => {
   console.log(users)
   socket.on("disconnect", () => {
     console.log(socket.id + " disconnected")
+    socket.broadcast.emit("count", users)
     index = users.indexOf(socket.id)
     if (index > -1) {
       users.splice(index, 1)

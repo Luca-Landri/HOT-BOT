@@ -1,4 +1,4 @@
-let socket = io("79.13.78.64:8000");
+let socket = io("87.10.197.160:8000");
 let messagesDOM = document.getElementById("messages");
 let form = document.querySelector("form");
 let input = document.querySelector("input");
@@ -27,7 +27,7 @@ function usernameModal(){
     modalForm.addEventListener("submit", (e) => {
         e.preventDefault();
         let username = modalForm.querySelector("input").value;
-        let img = `https://avatars.dicebear.com/api/${avatarType[Math.floor(Math.random()*avatarType.length)]}/:seed.svg`
+        let img = `https://avatars.dicebear.com/api/${avatarType[Math.floor(Math.random()*avatarType.length)]}/${username}:seed.svg`
         localStorage.setItem("img", img)
     
         if (username != "") {
