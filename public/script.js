@@ -27,7 +27,7 @@ function usernameModal(){
     modalForm.addEventListener("submit", (e) => {
         e.preventDefault();
         let username = modalForm.querySelector("input").value;
-        let img = `https://avatars.dicebear.com/api/${avatarType[Math.floor(Math.random()*avatarType.length)]}/${username}:seed.svg`
+        let img = `https://avatars.dicebear.com/api/${avatarType[Math.floor(Math.random()*avatarType.length)]}/${username}.svg`
         localStorage.setItem("img", img)
     
         if (username != "") {
