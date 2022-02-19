@@ -5,8 +5,8 @@ let userCount = 0
 let users = []
 let index
 
-const port = 8000;
-const url = "http://localhost:" + port;
+const PORT = process.env.PORT || 3000;
+const url = "http://localhost:" + PORT;
 const app = express();
 
 const server = require("http").createServer(app);
@@ -57,6 +57,6 @@ io.on('connection', (socket) => {
 })
 
 
-server.listen(port, () => {
-  console.log(`Listening on port ${port}`)
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`)
 })
