@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require("path");
-//const favicon = require('serve-favicon');
 let userCount = 0
 let users = []
 let index
@@ -14,8 +13,7 @@ const io = require("socket.io")(server, {cors: { origin: "*"}})
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, '/views'));
-app.engine('html', require('ejs').renderFile);
-app.set("view engine", "html");
+app.set("view engine", "ejs");
 
 app.get('/', (req, res) => {
   res.render("index.ejs")
