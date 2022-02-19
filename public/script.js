@@ -1,4 +1,4 @@
-let socket = io("87.10.197.160:8000");
+let socket = io();
 let messagesDOM = document.getElementById("messages");
 let form = document.querySelector("form");
 let input = document.querySelector("input");
